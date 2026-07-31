@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Georgia', serif;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #faf3f7 0%, #f3e5f5 50%, #e1bee7 100%);
+}
+
+#app {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Header */
+.heart-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.header-heart {
+  font-size: 2.5rem;
+  color: #e91e63;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.header-title {
+  font-size: 2.5rem;
+  color: #4a148c;
+  margin: 10px 0;
+}
+
+.header-subtitle {
+  font-size: 1rem;
+  color: #7b1fa2;
+  font-style: italic;
+}
+
+/* Letter Grid */
+.letter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* Locked Cards */
+.locked-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border: 2px solid transparent;
+  border-top: 4px solid var(--card-color, #e91e63);
+}
+
+.locked-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.locked-card-emoji {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+
+.locked-card-title {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.locked-card-hint {
+  font-size: 0.8rem;
+  color: #999;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .letter-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .locked-card {
+    padding: 20px 12px;
+  }
+
+  .locked-card-emoji {
+    font-size: 2rem;
+  }
+
+  .locked-card-title {
+    font-size: 0.85rem;
+  }
+
+  .header-title {
+    font-size: 1.8rem;
+  }
+}

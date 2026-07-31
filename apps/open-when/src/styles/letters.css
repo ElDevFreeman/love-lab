@@ -1,0 +1,124 @@
+/* Letter Overlay */
+.letter-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.letter-overlay--closing {
+  animation: fadeOut 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Open Letter */
+.open-letter {
+  background: #fffef7;
+  border-radius: 16px;
+  padding: 40px 30px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border-top: 5px solid var(--letter-color, #e91e63);
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.open-letter-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.open-letter-emoji {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.open-letter-title {
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.open-letter-body {
+  margin-bottom: 30px;
+}
+
+.open-letter-paragraph {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #4a4a4a;
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.open-letter-closing {
+  font-size: 1.1rem;
+  color: var(--letter-color, #e91e63);
+  font-style: italic;
+  font-weight: bold;
+  margin-top: 24px;
+  opacity: 0;
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.open-letter-close {
+  display: block;
+  margin: 0 auto;
+  background: none;
+  border: 1px solid #ddd;
+  color: #888;
+  padding: 10px 24px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Georgia', serif;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.open-letter-close:hover {
+  border-color: var(--letter-color, #e91e63);
+  color: var(--letter-color, #e91e63);
+  background: #fef5f8;
+}

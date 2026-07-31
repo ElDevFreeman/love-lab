@@ -1,0 +1,135 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Georgia', serif;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#app {
+  width: 100%;
+  max-width: 500px;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: flex-start;
+  padding-top: 40px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.app-title {
+  font-size: 2rem;
+  color: #880e4f;
+  margin-bottom: 8px;
+}
+
+.app-subtitle {
+  font-size: 1rem;
+  color: #ad1457;
+  font-style: italic;
+}
+
+/* Jar */
+.jar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  margin: 30px 0;
+}
+
+.jar {
+  position: relative;
+  width: 160px;
+  height: 200px;
+}
+
+.jar-lid {
+  width: 100px;
+  height: 20px;
+  background: linear-gradient(to bottom, #8d6e63, #6d4c41);
+  border-radius: 4px 4px 0 0;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.jar-body {
+  width: 140px;
+  height: 180px;
+  background: rgba(255, 255, 255, 0.3);
+  border: 3px solid rgba(255, 255, 255, 0.6);
+  border-radius: 10px 10px 30px 30px;
+  margin: -2px auto 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.jar-papers {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 120px;
+}
+
+.jar-paper {
+  position: absolute;
+  width: 40px;
+  height: 20px;
+  background: #fff;
+  border-radius: 2px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) rotate(var(--rotation)) translateX(var(--offset));
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.jar-paper:nth-child(odd) {
+  background: #ffe0ec;
+}
+
+.jar-paper:nth-child(even) {
+  background: #fff3e0;
+}
+
+.pull-button {
+  background: linear-gradient(135deg, #e91e63, #c2185b);
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  font-size: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: 'Georgia', serif;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+}
+
+.pull-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+}
+
+.pull-button:active {
+  transform: scale(0.98);
+}
+
+.message-area {
+  width: 100%;
+  margin-top: 20px;
+}

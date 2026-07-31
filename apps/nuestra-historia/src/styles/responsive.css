@@ -1,0 +1,51 @@
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .counters-row {
+    gap: 30px;
+  }
+
+  .counter-number {
+    font-size: 3rem;
+  }
+
+  .timeline::before {
+    left: 20px;
+  }
+
+  .timeline-card {
+    width: calc(100% - 60px);
+    margin-left: 50px !important;
+    text-align: left !important;
+  }
+
+  .timeline-dot {
+    left: -40px !important;
+    right: auto !important;
+  }
+
+  .final-message {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.6rem;
+  }
+
+  .counter-number {
+    font-size: 2.5rem;
+  }
+
+  .counters-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
