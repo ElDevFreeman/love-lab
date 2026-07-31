@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,900&display=swap');
+*{
+    font-family: 'Poppins',cursive;
+}
+body{
+    color: azure;
+    width: 100%;
+    height: 82vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+
+.botones{
+    padding: 9px;
+    border-radius: 80px;
+    background-color: transparent;
+    border: none;
+}
+
+.botones a{
+    background-color: #ff2d95;
+    padding: 12px 24px;
+    border-radius: 80px;
+    -webkit-border-radius: 80px;
+    -moz-border-radius: 80px;
+    -ms-border-radius: 80px;
+    -o-border-radius: 80px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    transition: background-color 0.3s ease;
+}
+
+.botones a:hover{
+    background-color: #cc0066;
+}
+
+.botones a:focus{
+    background-color: rgb(50, 194, 194);
+}
+
+.greetings{
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 1.1;
+}
+.greetings--second{
+    margin-bottom: 15px;
+}
+.greetings > span{
+    animation: glow 2.5s ease-in-out infinite;
+}
+@keyframes glow{
+    0%, 100%{
+        color: #fff;
+        text-shadow: 0 0 12px #ff2d95, 0 0 50px #ff2d95, 0 0 100px #ff2d95;
+    }
+    10%, 90%{
+        color: #111;
+        text-shadow: none;
+    }
+}
+.greetings > span:nth-child(2){
+    animation-delay: .15s ;
+}
+.greetings > span:nth-child(3){
+    animation-delay: .3s ;
+}
+.greetings > span:nth-child(4){
+    animation-delay: .45s;
+}
+.greetings > span:nth-child(5){
+    animation-delay: .6s;
+}
+.greetings > span:nth-child(6){
+    animation-delay: .75s;
+}
+.greetings > span:nth-child(7){
+    animation-delay: .9s;
+}
+.greetings > span:nth-child(8){
+    animation-delay: 1.05s;
+}
+
+.description{
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    opacity: 0;
+    animation: fadeInDesc 2s 1.5s ease-in-out forwards;
+}
+
+@keyframes fadeInDesc {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.button{
+    opacity: 0;
+    animation: fadeInDesc 2s 2.5s ease-in-out forwards;
+}
+
+.button a{
+    text-decoration: none;
+    font-size: 1rem;
+    color: #111;
+}
+
+@media screen and (max-width:574px){
+    .greetings{
+        display: block;
+        font-size: 3rem;
+        font-weight: 800;
+        text-align: center;
+    }
+    .description{
+        font-size: 1.1rem;
+        text-align: center;
+        padding: 0 20px;
+    }
+    
+    .button a{
+        font-size: 1rem;
+    }
+}

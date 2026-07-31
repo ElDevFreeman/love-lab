@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OurStart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(ellipse at 20% 50%, #1a0a1e 0%, #0d0d0d 50%),
+                        radial-gradient(ellipse at 80% 20%, #1a0a1e 0%, #0d0d0d 70%);
+            background-color: #0a0a0a;
+            font-family: 'Cormorant Garamond', serif;
+            color: #e8d5e0;
+            overflow-x: hidden;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Estrellas de fondo */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.15; transform: scale(1); }
+            100% { opacity: 0.9; transform: scale(1.2); }
+        }
+
+        /* Contenedor principal */
+        .container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 24px 40px;
+            min-height: 100vh;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Titulo */
+        .title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            font-weight: 400;
+            background: linear-gradient(135deg, #f7a8c4, #e4b8d4, #c97bdb, #f7a8c4);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInDown 1.8s ease forwards, shimmer 6s ease-in-out infinite;
+            line-height: 1.2;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: 1.3rem;
+            color: rgba(201, 123, 219, 0.8);
+            margin-bottom: 50px;
+            opacity: 0;
+            animation: fadeIn 2s ease 0.5s forwards;
+            letter-spacing: 1px;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Arbol SVG */
+        .tree-section {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: 420px;
+            margin: 10px 0 50px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .tree-svg {
+            width: 280px;
+            height: 400px;
+            filter: drop-shadow(0 0 25px rgba(201, 123, 219, 0.2));
+        }
+
+        .tree-trunk {
+            fill: #5c3a24;
+            animation: growUp 2s ease forwards;
+            transform-origin: bottom center;
+        }
+
+        .tree-branch {
+            stroke: #5c3a24;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            animation: drawBranch 2s ease forwards;
+        }
+
+        .tree-branch:nth-child(2) { animation-delay: 0.5s; }
+        .tree-branch:nth-child(3) { animation-delay: 0.8s; }
+        .tree-branch:nth-child(4) { animation-delay: 1.1s; }
+        .tree-branch:nth-child(5) { animation-delay: 1.4s; }
+        .tree-branch:nth-child(6) { animation-delay: 1.7s; }
+        .tree-branch:nth-child(7) { animation-delay: 2.0s; }
+        .tree-branch:nth-child(8) { animation-delay: 2.3s; }
+
+        @keyframes drawBranch {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes growUp {
+            0% { transform: scaleY(0); }
+            100% { transform: scaleY(1); }
+        }
+
+        /* Corazones cayendo */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .falling-heart {
+            position: absolute;
+            top: -50px;
+            animation: fallHeart linear infinite;
+            opacity: 0.6;
+        }
+
+        .falling-heart svg {
+            width: 18px;
+            height: 18px;
+            fill: #f7a8c4;
+            filter: drop-shadow(0 0 6px rgba(247, 168, 196, 0.4));
+        }
+
+        @keyframes fallHeart {
+            0% {
+                transform: translateY(-50px) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            10% { opacity: 0.6; }
+            50% { opacity: 0.5; }
+            90% { opacity: 0.3; }
+            100% {
+                transform: translateY(100vh) rotate(360deg) scale(0.3);
+                opacity: 0;
+            }
+        }
+
+        /* Corazones en el arbol */
+        .tree-heart {
+            animation: pulse 2.5s ease-in-out infinite, appear 0.8s ease forwards;
+            opacity: 0;
+            transform-origin: center;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.12); }
+        }
+
+        @keyframes appear {
+            to { opacity: 1; }
+        }
+
+        /* Secciones generales */
+        .story-section,
+        .timer-section {
+            max-width: 650px;
+            width: 100%;
+            padding: 45px 40px;
+            background: rgba(20, 8, 25, 0.5);
+            border-radius: 24px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            margin: 30px 0;
+            opacity: 0;
+        }
+
+        .story-section {
+            animation: fadeInUp 1.5s ease 1s forwards;
+        }
+
+        .timer-section {
+            text-align: center;
+            animation: fadeInUp 1.5s ease 1.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .story-section h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.4rem;
+            font-weight: 400;
+            color: #f7a8c4;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .story-section h2 .icon {
+            width: 26px;
+            height: 26px;
+            fill: #c97bdb;
+            opacity: 0.8;
+        }
+
+        .story-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-weight: 300;
+            line-height: 2;
+            color: #d4bfda;
+            text-align: left;
+        }
+
+        .story-text + .story-text {
+            margin-top: 20px;
+        }
+
+        .story-text .highlight {
+            color: #f7a8c4;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .story-text .time-stamp {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(247, 168, 196, 0.08);
+            padding: 3px 12px;
+            border-radius: 20px;
+        }
+
+        .story-text .time-stamp .icon {
+            width: 15px;
+            height: 15px;
+            fill: #f7a8c4;
+            opacity: 0.9;
+        }
+
+        /* Cronometro */
+        .timer-section h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.4rem;
+            font-weight: 400;
+            color: #f7a8c4;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .timer-section h2 .icon {
+            width: 24px;
+            height: 24px;
+            fill: #c97bdb;
+            opacity: 0.8;
+            animation: spin 10s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .timer-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 300;
+            color: rgba(154, 123, 168, 0.9);
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+        }
+
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .timer-block {
+            background: rgba(12, 4, 16, 0.6);
+            border-radius: 16px;
+            padding: 24px 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timer-block:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(201, 123, 219, 0.1);
+        }
+
+        .timer-number {
+            font-family: 'Tangerine', cursive;
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f7a8c4, #c97bdb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .timer-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #9a7ba8;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Separador decorativo */
+        .divider {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201, 123, 219, 0.4), transparent);
+            margin: 30px auto;
+        }
+
+        /* Detalles de la historia */
+        .detail-line {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 14px 0;
+            padding: 12px 16px;
+            background: rgba(12, 4, 16, 0.4);
+            border-radius: 12px;
+        }
+
+        .detail-line .icon {
+            width: 18px;
+            height: 18px;
+            fill: #f7a8c4;
+            flex-shrink: 0;
+            opacity: 0.8;
+        }
+
+        .detail-line span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-weight: 300;
+            color: #c9a8d4;
+            letter-spacing: 0.3px;
+        }
+
+        /* Glow flotante decorativo */
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glow-orb-1 {
+            width: 350px;
+            height: 350px;
+            background: rgba(201, 123, 219, 0.06);
+            top: 10%;
+            left: -120px;
+            animation: float 9s ease-in-out infinite;
+        }
+
+        .glow-orb-2 {
+            width: 280px;
+            height: 280px;
+            background: rgba(247, 168, 196, 0.05);
+            bottom: 15%;
+            right: -100px;
+            animation: float 11s ease-in-out infinite reverse;
+        }
+
+        .glow-orb-3 {
+            width: 200px;
+            height: 200px;
+            background: rgba(180, 100, 200, 0.04);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: float 13s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-25px); }
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            padding: 20px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s ease 2.5s forwards;
+        }
+
+        .footer p {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+            color: rgba(122, 90, 138, 0.7);
+        }
+
+        /* ===== RESPONSIVE - iPhone 16 (393px) ===== */
+        @media (max-width: 430px) {
+            .container {
+                padding: 45px 18px 30px;
+            }
+
+            .title {
+                font-size: 3.4rem;
+                line-height: 1.3;
+            }
+
+            .subtitle {
+                font-size: 1.05rem;
+                margin-bottom: 35px;
+            }
+
+            .tree-section {
+                height: 320px;
+                margin: 0 0 35px;
+            }
+
+            .tree-svg {
+                width: 210px;
+                height: 300px;
+            }
+
+            .story-section,
+            .timer-section {
+                padding: 30px 22px;
+                margin: 18px 0;
+                border-radius: 20px;
+            }
+
+            .story-section h2 {
+                font-size: 2rem;
+                gap: 10px;
+            }
+
+            .story-section h2 .icon {
+                width: 22px;
+                height: 22px;
+            }
+
+            .story-text {
+                font-size: 1.05rem;
+                line-height: 1.85;
+            }
+
+            .timer-section h2 {
+                font-size: 2rem;
+            }
+
+            .timer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .timer-block {
+                padding: 20px 8px;
+                border-radius: 14px;
+            }
+
+            .timer-number {
+                font-size: 3rem;
+            }
+
+            .timer-label {
+                font-size: 0.7rem;
+                letter-spacing: 1.5px;
+            }
+
+            .detail-line {
+                padding: 10px 14px;
+                gap: 10px;
+            }
+
+            .detail-line .icon {
+                width: 16px;
+                height: 16px;
+            }
+
+            .detail-line span {
+                font-size: 0.9rem;
+            }
+
+            .divider {
+                margin: 22px auto;
+            }
+
+            .footer p {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* ===== Pantallas medianas (tablets) ===== */
+        @media (min-width: 431px) and (max-width: 768px) {
+            .title {
+                font-size: 4rem;
+            }
+
+            .tree-section {
+                height: 380px;
+            }
+
+            .tree-svg {
+                width: 250px;
+                height: 360px;
+            }
+
+            .story-section,
+            .timer-section {
+                padding: 35px 30px;
+            }
+
+            .timer-grid {
+                gap: 12px;
+            }
+
+            .timer-number {
+                font-size: 3.2rem;
+            }
+        }
+
+        /* ===== Laptop / Desktop ===== */
+        @media (min-width: 769px) {
+            .container {
+                padding: 80px 40px 60px;
+            }
+
+            .title {
+                font-size: 5.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.4rem;
+                margin-bottom: 60px;
+            }
+
+            .tree-section {
+                height: 450px;
+                margin-bottom: 60px;
+            }
+
+            .tree-svg {
+                width: 300px;
+                height: 420px;
+            }
+
+            .story-section,
+            .timer-section {
+                padding: 50px 55px;
+                margin: 25px 0;
+            }
+
+            .story-section h2 {
+                font-size: 2.8rem;
+            }
+
+            .story-text {
+                font-size: 1.25rem;
+                line-height: 2.1;
+            }
+
+            .timer-number {
+                font-size: 4rem;
+            }
+
+            .timer-label {
+                font-size: 0.85rem;
+            }
+
+            .timer-block {
+                padding: 28px 12px;
+            }
+
+            .detail-line span {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Orbes de luz -->
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="glow-orb glow-orb-3"></div>
+
+    <!-- Estrellas -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Corazones cayendo -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- Contenido principal -->
+    <div class="container">
+
+        <h1 class="title">OurStart</h1>
+        <p class="subtitle">El comienzo de todo lo nuestro</p>
+
+        <!-- Arbol con corazones -->
+        <div class="tree-section">
+            <svg class="tree-svg" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg">
+                <!-- Tronco -->
+                <rect class="tree-trunk" x="140" y="250" width="20" height="180" rx="5"/>
+                
+                <!-- Ramas -->
+                <path class="tree-branch" d="M150 250 Q120 220 80 200"/>
+                <path class="tree-branch" d="M150 250 Q180 220 220 200"/>
+                <path class="tree-branch" d="M150 220 Q110 190 70 160"/>
+                <path class="tree-branch" d="M150 220 Q190 190 230 160"/>
+                <path class="tree-branch" d="M150 190 Q120 160 90 130"/>
+                <path class="tree-branch" d="M150 190 Q180 160 210 130"/>
+                <path class="tree-branch" d="M150 160 Q130 130 110 100"/>
+                <path class="tree-branch" d="M150 160 Q170 130 190 100"/>
+
+                <!-- Corazones en las ramas -->
+                <g class="tree-heart" style="animation-delay: 2.5s">
+                    <path d="M75 195 C75 189 80 185 85 188 C90 185 95 189 95 195 C95 204 85 210 85 210 C85 210 75 204 75 195Z" fill="#f7a8c4"/>
+                </g>
+                <g class="tree-heart" style="animation-delay: 2.8s">
+                    <path d="M215 195 C215 189 220 185 225 188 C230 185 235 189 235 195 C235 204 225 210 225 210 C225 210 215 204 215 195Z" fill="#e091b8"/>
+                </g>
+                <g class="tree-heart" style="animation-delay: 3.1s">
+                    <path d="M65 155 C65 149 70 145 75 148 C80 145 85 149 85 155 C85 164 75 170 75 170 C75 170 65 164 65 155Z" fill="#c97bdb"/>
+                </g>
+                <g class="tree-heart" style="animation-delay: 3.4s">
+                    <path d="M225 155 C225 149 230 145 235 148 C240 145 245 149 245 155 C245 164 235 170 235 170 C235 170 225 164 225 155Z" fill="#f7a8c4"/>
+                </g>
+                <g class="tree-heart" style="animation-delay: 3.7s">
+                    <path d="M85 125 C85 119 90 115 95 118 C100 115 105 119 105 125 C105 134 95 140 95 140 C95 140 85 134 85 125Z" fill="#d68fbf"/>
+                </g>
+                <g class="tree-heart" style="animation-delay: 4.0s">
+                    <path d="M205 125 C205 119 210 115 215 118 C220 115 225 119 225 125 C225 134 215 140 215 140 C215 140 205 134 205 125Z" fill="#c97bdb"/>
+                </g>
+                <g class="tree-heart" style="animation-delay: 4.3s">
+                    <path d="M105 95 C105 89 110 85 115 88 C120 85 125 89 125 95 C125 104 115 110 115 110 C115 110 105 104 105 95Z" fill="#f7a8c4"/>
+                </g>
+                <g class="tree-heart" style="animation-delay: 4.6s">
+                    <path d="M185 95 C185 89 190 85 195 88 C200 85 205 89 205 95 C205 104 195 110 195 110 C195 110 185 104 185 95Z" fill="#e091b8"/>
+                </g>
+                <g class="tree-heart" style="animation-delay: 4.9s">
+                    <path d="M140 65 C140 56 148 50 155 55 C162 50 170 56 170 65 C170 78 155 88 155 88 C155 88 140 78 140 65Z" fill="#f7a8c4"/>
+                </g>
+
+                <!-- Raices -->
+                <path d="M140 430 Q130 440 115 445" stroke="#4a2e1a" stroke-width="3" fill="none" opacity="0.5" stroke-linecap="round"/>
+                <path d="M160 430 Q170 440 185 445" stroke="#4a2e1a" stroke-width="3" fill="none" opacity="0.5" stroke-linecap="round"/>
+                <path d="M145 430 Q140 445 135 450" stroke="#4a2e1a" stroke-width="2" fill="none" opacity="0.35" stroke-linecap="round"/>
+                <path d="M155 430 Q160 445 165 450" stroke="#4a2e1a" stroke-width="2" fill="none" opacity="0.35" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <!-- Historia -->
+        <section class="story-section">
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                Donde todo comenzo
+            </h2>
+            <div class="divider"></div>
+            <p class="story-text">
+                Todo comenzo con un simple mensaje. No era un dia cualquiera, ni una hora cualquiera.
+                Era <span class="highlight">un 23 de junio</span>, cuando el reloj marcaba
+                <span class="time-stamp">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+                    11:30 de la noche
+                </span>.
+                El mundo dormia, pero algo desperto entre nosotros.
+            </p>
+            <p class="story-text">
+                Un mensaje que no pretendia cambiar nada, termino cambiandolo todo. 
+                Esa noche, sin saberlo, se planto la semilla de algo que creceria con el tiempo, 
+                como un arbol que extiende sus ramas y florece con cada recuerdo compartido, 
+                con cada palabra dicha y cada silencio entendido.
+            </p>
+            <p class="story-text">
+                Desde esa noche, el tiempo no ha dejado de contar a nuestro favor. 
+                Cada segundo que pasa es un segundo mas <span class="highlight">juntos</span>, 
+                un segundo mas de esta historia que comenzo con la valentia de un mensaje 
+                en medio de la noche.
+            </p>
+
+            <div class="divider"></div>
+
+            <div class="detail-line">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+                <span>23 de junio &mdash; La fecha que lo cambio todo</span>
+            </div>
+            <div class="detail-line">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+                <span>11:30 PM &mdash; La hora exacta del primer mensaje</span>
+            </div>
+            <div class="detail-line">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+                <span>Un mensaje &mdash; El inicio de nuestra historia</span>
+            </div>
+        </section>
+
+        <!-- Cronometro -->
+        <section class="timer-section">
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+                Tiempo juntos
+            </h2>
+            <p class="timer-subtitle">Desde las 11:30 PM del 23 de junio</p>
+            <div class="timer-grid">
+                <div class="timer-block">
+                    <span class="timer-number" id="days">0</span>
+                    <span class="timer-label">Dias</span>
+                </div>
+                <div class="timer-block">
+                    <span class="timer-number" id="hours">0</span>
+                    <span class="timer-label">Horas</span>
+                </div>
+                <div class="timer-block">
+                    <span class="timer-number" id="minutes">0</span>
+                    <span class="timer-label">Minutos</span>
+                </div>
+                <div class="timer-block">
+                    <span class="timer-number" id="seconds">0</span>
+                    <span class="timer-label">Segundos</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer">
+            <p>Nuestra historia sigue escribiendose...</p>
+        </div>
+    </div>
+
+    <script>
+        // === ESTRELLAS DE FONDO ===
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numStars = 120;
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 4 + 's';
+                star.style.animationDuration = (2.5 + Math.random() * 3) + 's';
+                const size = 1 + Math.random() * 2;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // === CORAZONES CAYENDO ===
+        function createFallingHeart() {
+            const container = document.getElementById('heartsContainer');
+            const heart = document.createElement('div');
+            heart.className = 'falling-heart';
+            heart.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+            
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (6 + Math.random() * 9) + 's';
+            heart.style.animationDelay = '0s';
+            
+            const size = 10 + Math.random() * 16;
+            heart.querySelector('svg').style.width = size + 'px';
+            heart.querySelector('svg').style.height = size + 'px';
+            
+            const colors = ['#f7a8c4', '#c97bdb', '#e091b8', '#d68fbf', '#f0c0d8', '#dba4e6'];
+            heart.querySelector('svg').style.fill = colors[Math.floor(Math.random() * colors.length)];
+            
+            container.appendChild(heart);
+            
+            setTimeout(() => {
+                if (heart.parentNode) heart.remove();
+            }, 15000);
+        }
+
+        // === CRONOMETRO ===
+        function updateTimer() {
+            const startDate = new Date(2025, 5, 23, 23, 30, 0);
+            const now = new Date();
+            const diff = now - startDate;
+
+            if (diff < 0) return;
+
+            const seconds = Math.floor(diff / 1000) % 60;
+            const minutes = Math.floor(diff / (1000 * 60)) % 60;
+            const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // === INICIALIZACION ===
+        createStars();
+        updateTimer();
+        setInterval(updateTimer, 1000);
+
+        // Corazones: ritmo mas suave
+        setInterval(createFallingHeart, 1200);
+
+        // Corazones iniciales con delay
+        for (let i = 0; i < 4; i++) {
+            setTimeout(createFallingHeart, i * 500);
+        }
+    </script>
+</body>
+</html>
